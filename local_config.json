@@ -1,0 +1,123 @@
+{
+  "microsoft_teams_notification": {
+    "enabled": true,
+    "url": "https://outlook.office.com/webhook/9df46297-1672-433a-884d-3429f74d15da@60c55aa0-5d39-4841-afd4-8506bbdaf20c/IncomingWebhook/b808d1194cd14754b28b7c9b0540a054/1dc9d2ae-9976-4fbb-b449-31d66948537a"
+  },
+  "hb_s3_path": {
+    "bucket_name": "yodlee-dataops",
+    "inhouse_metrics":{
+      "key_prefix": "heartbeat-alerts/inhouse-metrics",
+      "key_suffix": "_jobs_status.txt"
+    },
+    "pc_metrics": {
+      "key_prefix": "heartbeat-alerts/pc-metrics",
+      "key_suffix": "_PC_Consolidation.csv"      
+    },
+    "localfile_prefix": "/tmp/hb_alerts/hb_metric_files/"
+  },
+  "panel_config": {
+    "panels": [
+      "CPANELV2",
+      "4MV3",
+	  "CPANELV3",
+      "4MV4"
+    ],
+    "4MV3": {
+      "bucket_name": "yodleeproducts",
+      "BANK": {
+        "s3_key_prefix": "panels/4m_v3.1/bank",
+        "s3_key_suffix": "_4M_BANK_PANEL.txt.gz"
+      },
+      "CARD": {
+        "s3_key_prefix": "panels/4m_v3.1/card",
+        "s3_key_suffix": "_4M_CARD_PANEL.txt.gz"
+      }
+    },
+    "CPANELV2": {
+      "bucket_name": "yodleeproducts",
+      "BANK": {
+        "s3_key_prefix": "panels/cpanel_v2/us/bank",
+        "s3_key_suffix": "_CPANEL_BANK.txt.gz"
+      },
+      "CARD": {
+        "s3_key_prefix": "panels/cpanel_v2/us/card",
+        "s3_key_suffix": "_CPANEL_CARD.txt.gz"
+      }
+    },
+	"4MV4": {
+      "bucket_name": "yodleeproducts4mv4",
+      "BANK": {
+        "s3_key_prefix": "atxtlatest/panels/bank",
+        "s3_key_suffix": "_4M_BANK_001.txt.gz"
+      },
+      "CARD": {
+        "s3_key_prefix": "atxtlatest/panels/card",
+        "s3_key_suffix": "_4M_CARD_001.txt.gz"
+      }
+    },
+    "CPANELV3": {
+      "bucket_name": "yodleeproductscpanelv3",
+      "BANK": {
+        "s3_key_prefix": "atxtlatest/panels/bank",
+        "s3_key_suffix": "_CPANEL_BANK_001.txt.gz"
+      },
+      "CARD": {
+        "s3_key_prefix": "atxtlatest/panels/card",
+        "s3_key_suffix": "_CPANEL_CARD_001.txt.gz"
+      }
+    },
+    "BASE_PANEL": {
+      "bucket_name": "yodleeprivate",
+      "BANK": {
+        "s3_key_prefix": "panels/mpanel/base_panel/v3/bank",
+        "s3_key_suffix": "_MPANEL_BANK.txt.gz"
+      },
+      "CARD": {
+        "s3_key_prefix": "panels/mpanel/base_panel/v3/card",
+        "s3_key_suffix": "_MPANEL_CARD.txt.gz"
+      }
+    }
+  },
+  "hb_stages": {
+    "inhouse": [ "DATA_INGESTION",
+                 "WAREHOUSE_DATA_LOAD",
+                 "BASE_PANEL_GENERATION"
+    ],
+    "pc": [ "INPUT_GENERATION_FOR_ENRICHMENT",
+            "ENRICHMENT",
+            "PANEL_GENERATION",
+            "PANEL_CERTIFICATION",
+            "PANEL_UPLOAD"
+    ]
+  },
+  "hb_signal_directory": "/tmp/hb_generator_signals/",
+  "sns": {
+    "topicARN" : "arn:aws:sns:us-west-2:003144629351:HeartbeatAlerts",
+    "subject" : "Envestnet|Yodlee - Heartbeat Alert : Panel Generation Pipeline Progression",
+    "enabled" : true
+  },
+  "sqs":{
+    "queueUrl" : "https://sqs.us-west-2.amazonaws.com/003144629351/pnl_heartbeat",
+    "enabled" : true
+  },
+  "hb_db": {
+    "dbHost": "localhost",
+    "dbPort": 3306,
+    "dbName": "HEARTBEAT_ALERTS",
+    "dbUser": "heartbeatalerts",
+    "dbPassword": "h3ar4b3a4"
+   },
+  "pc_db": {
+    "dbHost": "localhost",
+    "dbName": "PANEL_CONSOLIDATION",
+    "dbUser": "panelgen",
+    "dbPwd": "p@nelgen2015"
+  },
+  "email_list": {
+   "prod": [ "spatil4@yodlee.com" , 
+       "mtirupari@yodlee.com",
+       "jgunasekaran@yodlee.com",
+      "JWeldegiorgis@yodlee.com"
+     ]
+  }
+}
